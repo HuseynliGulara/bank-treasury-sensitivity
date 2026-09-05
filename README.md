@@ -25,4 +25,9 @@ Multiple regression with HAC standard errors to estimate interest rate betas, fo
 - figures/ : generated plots and charts
 
 ## Status
-Work in progress.
+Completed. All four hypotheses tested using OLS regression with HAC
+standard errors (2015-2026 daily data). Key finding: bank stocks show
+statistically significant interest rate sensitivity 7-15x larger than
+the broader market, with sensitivity varying substantially over time
+(near zero in 2020, peaking during the 2021-2022 rate hiking cycle).
+See paper/results.md for full results.
