@@ -1,0 +1,22 @@
+,value
+Sample: N,2961
+Sample: first / last observation,2015-01-05 / 2026-11-12
+Sample: days dropped (Treasury market closed),22
+Footnote 4: SP500TR minus GSPC annualized return (pp),1.93
+COVID exclusion: trading days removed,43
+2024 negative rolling beta: JPM,never (min 0.010)
+2024 negative rolling beta: BAC,"162 days, 2024-03-26 to 2024-11-15, min -0.032"
+2024 negative rolling beta: WFC,"15 days, 2024-07-02 to 2024-07-30, min -0.004"
+2024 negative rolling beta: C,"162 days, 2024-03-15 to 2024-11-05, min -0.032"
+2024 negative rolling beta: GS,"164 days, 2024-03-13 to 2024-11-05, min -0.029"
+2024 negative rolling beta: MS,"174 days, 2024-02-23 to 2024-11-06, min -0.032"
+2024 negative rolling beta: KRE,"177 days, 2024-03-25 to 2024-12-16, min -0.051"
+"Std of daily ΔDGS3MO, 2015-2016 (bp)",1.87
+"Std of daily ΔDGS3MO, Jun 2020 - Dec 2021 (bp)",0.91
+"Std of daily ΔDGS3MO, 2022-2026 (bp)",3.76
+"S&P 500 beta 2020 - Mar 2022, full",0.046 (p = 0.017)
+"S&P 500 rolling beta 2020-21 peak, full",0.111 on 2021-03-22
+"S&P 500 rolling beta 2019 mean, full",0.04
+"S&P 500 beta 2020 - Mar 2022, ex-COVID",0.014 (p = 0.053)
+"S&P 500 rolling beta 2020-21 peak, ex-COVID",0.053 on 2021-01-28
+"S&P 500 rolling beta 2019 mean, ex-COVID",0.04

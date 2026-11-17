@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper."
+title: "When Rising Rates Stopped Helping Banks: Replication code"
+authors:
+  - family-names: Huseynli
+    given-names: Gulara
+    affiliation: Independent Researcher
+license: MIT
+repository-code: "https://github.com/HuseynliGulara/bank-treasury-sensitivity"
+preferred-citation:
+  type: article
+  title: "When Rising Rates Stopped Helping Banks: Time-Varying Treasury Sensitivity of U.S. Bank Stocks, 2015-2026"
+  authors:
+    - family-names: Huseynli
+      given-names: Gulara
+      affiliation: Independent Researcher
+  year: 2026
+  month: 11
+  journal: "Working Paper"

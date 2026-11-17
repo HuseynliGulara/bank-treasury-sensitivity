@@ -1,0 +1,13 @@
+,SP500TR (Model 2)
+beta_before,0.03269068552
+beta_after,-0.01421939523
+change,-0.04691008075
+decline_pct,143.496779
+chow_F,34.07591653
+chow_p,0
+robust_F_all,23.99926024
+robust_p_all,2.498886255e-05
+robust_F_beta,23.82721095
+robust_p_beta,1.053821339e-06
+N_before,1799
+N_after,1162
