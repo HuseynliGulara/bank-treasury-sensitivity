@@ -81,7 +81,6 @@ def build_sample(save=True):
     sample.index.name = "date"
 
     info = {
-        "trading_days_yahoo": int(prices[cfg.ASSETS].dropna().shape[0]),
         "dropped_days": int(n_joined - len(merged)),
         "N": len(sample),
         "first": sample.index[0].date(),

@@ -5,7 +5,6 @@ Values are copied from the SSRN version (November 2026) at the precision printed
 """
 import pytest
 
-from src import config as cfg
 from src import data, tables
 
 

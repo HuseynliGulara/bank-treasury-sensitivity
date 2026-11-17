@@ -129,16 +129,8 @@ def table8_robustness(sample):
 
 
 def table9_break_ex_covid(sample):
-    ex = exclude_covid(sample)
-    rows = {}
-    for b in cfg.BANKS:
-        z, inter = add_post(ex, cfg.X_MODEL1)
-        f = ols_hac(z, f"ret_{b}", cfg.X_MODEL1 + inter)
-        pre, ch = f.params[R], f.params[f"{R}_x_post"]
-        rows[b] = {"beta_before": pre, "beta_after": pre + ch,
-                   "decline_pct": (1 - (pre + ch) / pre) * 100,
-                   "p_change": f.pvalues[f"{R}_x_post"]}
-    return pd.DataFrame(rows).T
+    cols = ["beta_before", "beta_after", "decline_pct", "p_change"]
+    return table5_break(exclude_covid(sample))[cols]
 
 
 def table10_level_slope(sample):

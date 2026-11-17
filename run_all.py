@@ -6,8 +6,6 @@
 import argparse
 import time
 
-import pandas as pd
-
 from src import config as cfg
 from src import data, figures, tables
 from src.text_numbers import text_numbers

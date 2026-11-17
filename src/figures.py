@@ -28,42 +28,39 @@ def _event_lines(ax):
     ax.spines[["top", "right"]].set_visible(False)
 
 
-def figure1(sample):
-    """252-day rolling beta on the 10-year yield, Model 1."""
-    roll = rolling_betas(sample, cfg.X_MODEL1)
+def _group_panels(roll, market=None):
+    """Three panels (commercial, investment, regional), optionally with the market line."""
     fig, axes = plt.subplots(3, 1, figsize=(9, 9), sharex=True, sharey=True)
     for ax, (title, members) in zip(axes, GROUPS.items()):
         for b in members:
             ax.plot(roll.index, roll[b], lw=1.1, label=b)
+        if market is not None:
+            ax.plot(market.index, market, lw=1.2, color="black", ls="--", label="S&P 500 TR")
         _event_lines(ax)
         ax.set_title(title, fontsize=10, loc="left")
-        ax.legend(frameon=False, fontsize=8, loc="upper left")
+        ax.legend(frameon=False, fontsize=8, loc="upper left",
+                  ncol=1 if market is None else 2)
     axes[1].set_ylabel("252-day rolling beta on ΔDGS10")
+    return fig, axes
+
+
+def figure1(sample):
+    """252-day rolling beta on the 10-year yield, Model 1."""
+    fig, axes = _group_panels(rolling_betas(sample, cfg.X_MODEL1))
     axes[0].text(pd.Timestamp(cfg.BREAK_DATE), axes[0].get_ylim()[1] * 0.9,
                  " Mar 2022", fontsize=8, color="grey")
     axes[0].text(pd.Timestamp(cfg.SVB_DATE), axes[0].get_ylim()[1] * 0.75,
                  " SVB", fontsize=8, color="grey")
     fig.tight_layout()
     _save(fig, "figure1_rolling_beta_model1")
-    return roll
 
 
 def figure2(sample):
     """Rolling betas for banks and the S&P 500, all from Model 2."""
-    roll = rolling_betas(sample, cfg.X_MODEL2)
-    mkt = rolling_beta(sample, f"ret_{cfg.MARKET}", cfg.X_MODEL2)
-    fig, axes = plt.subplots(3, 1, figsize=(9, 9), sharex=True, sharey=True)
-    for ax, (title, members) in zip(axes, GROUPS.items()):
-        for b in members:
-            ax.plot(roll.index, roll[b], lw=1.1, label=b)
-        ax.plot(mkt.index, mkt, lw=1.2, color="black", ls="--", label="S&P 500 TR")
-        _event_lines(ax)
-        ax.set_title(title, fontsize=10, loc="left")
-        ax.legend(frameon=False, fontsize=8, loc="upper left", ncol=2)
-    axes[1].set_ylabel("252-day rolling beta on ΔDGS10")
+    market = rolling_beta(sample, f"ret_{cfg.MARKET}", cfg.X_MODEL2)
+    fig, _ = _group_panels(rolling_betas(sample, cfg.X_MODEL2), market)
     fig.tight_layout()
     _save(fig, "figure2_rolling_beta_model2_with_market")
-    return roll, mkt
 
 
 def figureA1(sample):

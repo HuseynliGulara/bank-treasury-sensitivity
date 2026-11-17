@@ -138,6 +138,7 @@ def break_test(data, y, X, break_date=cfg.BREAK_DATE):
         "chow_F": F, "chow_p": pF,
         "robust_F_all": float(w_all.statistic), "robust_p_all": float(w_all.pvalue),
         "robust_F_beta": float(w_beta.statistic), "robust_p_beta": float(w_beta.pvalue),
+        "p_change": f.pvalues[f"{cfg.RATE}_x_post"],
         "N_before": n_pre, "N_after": n_post,
     }
 
