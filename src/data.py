@@ -1,4 +1,6 @@
 """Download the raw data and build the estimation sample."""
+import json
+
 import numpy as np
 import pandas as pd
 
@@ -81,14 +83,16 @@ def build_sample(save=True):
     sample.index.name = "date"
 
     info = {
-        "dropped_days": int(n_joined - len(merged)),
         "N": len(sample),
-        "first": sample.index[0].date(),
-        "last": sample.index[-1].date(),
+        "first": str(sample.index[0].date()),
+        "last": str(sample.index[-1].date()),
+        "dropped_days": int(n_joined - len(merged)),
+        "dividend_gap_pp": round(dividend_gap(prices) * 100, 2),
     }
     if save:
         cfg.PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
         sample.to_csv(cfg.PROCESSED_DIR / "sample.csv", float_format="%.12g")
+        (cfg.PROCESSED_DIR / "sample_info.json").write_text(json.dumps(info, indent=2) + "\n")
     return sample, info
 
 
@@ -96,9 +100,13 @@ def load_sample():
     return pd.read_csv(cfg.PROCESSED_DIR / "sample.csv", index_col=0, parse_dates=True)
 
 
-def dividend_check():
-    """Annualized return gap between the total-return and price index (footnote 4)."""
-    p = load_prices()[[cfg.MARKET, cfg.PRICE_INDEX]].dropna()
+def load_sample_info():
+    return json.loads((cfg.PROCESSED_DIR / "sample_info.json").read_text())
+
+
+def dividend_gap(prices):
+    """Annualized return of the total-return index minus the price index (footnote 4)."""
+    p = prices[[cfg.MARKET, cfg.PRICE_INDEX]].dropna()
     years = (p.index[-1] - p.index[0]).days / 365.25
     cagr = (p.iloc[-1] / p.iloc[0]) ** (1 / years) - 1
     return float(cagr[cfg.MARKET] - cagr[cfg.PRICE_INDEX])

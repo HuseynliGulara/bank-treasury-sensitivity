@@ -6,12 +6,12 @@ from .econometrics import ols_hac, rolling_beta, rolling_betas
 from .tables import exclude_covid
 
 
-def text_numbers(sample, build_info, dividend_gap):
+def text_numbers(sample, build_info):
     out = {}
     out["Sample: N"] = build_info["N"]
     out["Sample: first / last observation"] = f"{build_info['first']} / {build_info['last']}"
     out["Sample: days dropped (Treasury market closed)"] = build_info["dropped_days"]
-    out["Footnote 4: SP500TR minus GSPC annualized return (pp)"] = round(dividend_gap * 100, 2)
+    out["Footnote 4: SP500TR minus GSPC annualized return (pp)"] = build_info["dividend_gap_pp"]
 
     covid = sample.loc[cfg.COVID_START:cfg.COVID_END]
     out["COVID exclusion: trading days removed"] = len(covid)

@@ -26,15 +26,12 @@ def main(download=False):
 
     if data.raw_prices_available():
         print("Building the sample from data/raw")
-        sample, info = data.build_sample()
-        dividend_gap = data.dividend_check()
+        data.build_sample()
     else:
         print("Raw Yahoo prices not found; using data/processed/sample.csv "
               "(run with --download to rebuild from raw data)")
-        sample = data.load_sample()
-        info = {"N": len(sample), "first": sample.index[0].date(),
-                "last": sample.index[-1].date(), "dropped_days": "n/a"}
-        dividend_gap = float("nan")
+    # Always estimate on the saved sample, so every run gives identical output
+    sample, info = data.load_sample(), data.load_sample_info()
     print(f"  N = {info['N']}, {info['first']} to {info['last']}")
 
     print("Tables")
@@ -59,7 +56,7 @@ def main(download=False):
     save(tables.hac_lag_sensitivity(sample), "text_hac_lags")
     save(tables.wald_2y(sample), "text_wald_2y_model2")
     save(tables.rolling_peaks(sample), "text_rolling_peaks_ex_covid")
-    save(text_numbers(sample, info, dividend_gap).to_frame(), "text_numbers")
+    save(text_numbers(sample, info).to_frame(), "text_numbers")
 
     print("Figures")
     figures.figure1(sample)
