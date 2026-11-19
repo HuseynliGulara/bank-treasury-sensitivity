@@ -3,7 +3,7 @@
 Replication code for
 
 > Huseynli, Gulara (2026). *When Rising Rates Stopped Helping Banks: Time-Varying Treasury
-> Sensitivity of U.S. Bank Stocks, 2015-2026.* Working paper (submitted to SSRN, link to follow).
+> Sensitivity of U.S. Bank Stocks, 2015-2026.* SSRN Working Paper. [https://papers.ssrn.com/abstract=7709999](https://papers.ssrn.com/abstract=7709999)
 
 The code downloads the data and reproduces every table and figure in the paper.
 
